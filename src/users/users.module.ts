@@ -5,11 +5,13 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { UserEntity } from './infraestructure/persistence/entities/user.entity';
 import { UsersEntityRepository } from './infraestructure/persistence/repositories/users.repository';
 import { USERS_REPOSITORY } from './domain/repositories/users.repository';
+import { UserProfile } from './application/transform/profiles/user.profile';
 
 @Module({
   imports: [TypeOrmModule.forFeature([UserEntity])],
   providers: [
     { useClass: UsersEntityRepository, provide: USERS_REPOSITORY },
+    UserProfile,
     UsersService,
   ],
   controllers: [UsersController],
